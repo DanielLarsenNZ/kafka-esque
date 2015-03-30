@@ -1,16 +1,16 @@
 ﻿(function() {
     "use strict";
 
-    // //////////
+    // /////////////
     // kafka-esque
-    // //////////
+    // ////////////
     
     var _ = require("underscore");
 
     var consumers = [];
-    var queueTime = 100;
+    //var queueTime = 100;
     
-    var FakeKafka = new function () { 
+    var Kafkaesque = new function () { 
 
         this.Producer = function () {
             this.send = function (payloads, cb) {
@@ -29,7 +29,8 @@
                     }
                 
                     _.each(payload.messages, function (message) {
-                        setTimeout(function () { topicConsumers[index].onmessage(message); }, queueTime);
+                        //setTimeout(function () { topicConsumers[index].onmessage(message); }, queueTime);
+                        setImmediate(function () { topicConsumers[index].onmessage(message); });
                         console.log("Message for {topic} will be sent to Consumer {index}.", payload.topic, index);
                     });
 
@@ -56,5 +57,5 @@
         };
     }
 
-    module.exports = FakeKafka;
+    module.exports = Kafkaesque;
 })();
