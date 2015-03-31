@@ -7,10 +7,14 @@
     
     var _ = require("underscore");
 
-    var consumers = [];
     //var queueTime = 100;
+    var consumers = [];
     
-    var Kafkaesque = new function () { 
+    var Kafkaesque = new function () {
+        
+        this.getConsumers = function(){
+            return consumers;
+        };
 
         this.Producer = function () {
             this.send = function (payloads, cb) {

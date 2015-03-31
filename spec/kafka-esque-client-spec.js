@@ -16,7 +16,13 @@ describe("Kafka-esque-client", function(){
       expect(function(){
         consumer.on("connect", function(){});
       }).toThrowError("on connect is not supported.");
-
     });
+
+    it("should add topic abc to consumers", function(){
+      consumer.on("message", function(){});
+
+      expect(kafka.getConsumers()[0].topic === 'abc').toBe(true);
+    });
+
   });
 });
