@@ -43,7 +43,7 @@
             this.payloads = payloads;
 
             this.on = function (name, cb) {
-                if (name = 'message') {
+                if (name === 'message') {
                     _.each(this.payloads, function (payload) {
                         consumers.push({ topic: payload.topic, onmessage: cb });
                         console.log("Consumer registered for {topic}.", payload.topic);
@@ -52,7 +52,7 @@
                     return;
                 }
 
-                throw "on " + name + " is not supported.";  
+                throw new Error("on " + name + " is not supported.");
             };
         };
     }
